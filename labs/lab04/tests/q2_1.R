@@ -36,6 +36,17 @@ test = list(
                  "`Horsepower` still has 0s in it. Replace them with NA, the same way you did for `MPG`.")
         .t_check(sum(is.na(cars_clean$Horsepower)) == 6,
                  "`Horsepower` should have exactly 6 NAs. Only the 0s should change.")
+        .t_check(is.integer(cars_clean$Cylinders),
+                 "`Cylinders` holds whole numbers, so store it as an integer, like `Year`.")
+        .t_check(is.factor(cars_clean$Origin),
+                 "`Origin` should be a factor. Use factor().")
+        .t_check(!anyNA(cars_clean$Origin),
+                 "`Origin` has NAs. Any value that doesn't match a level becomes NA, so check that the levels are spelled exactly US, Europe, Japan.")
+        .t_check(!identical(levels(cars_clean$Origin), c("Europe", "Japan", "US")),
+                 "`Origin` has its levels in alphabetical order (Europe, Japan, US). That's what factor() and as.factor() do when you don't list the levels. Use factor() with the levels argument to put them in the order US, Europe, Japan.")
+        .t_check(identical(levels(cars_clean$Origin), c("US", "Europe", "Japan")),
+                 paste0("`Origin` has the levels ", paste(levels(cars_clean$Origin), collapse = ", "),
+                        ". Use the levels argument of factor() to list them in the order US, Europe, Japan."))
       }
     )
   )

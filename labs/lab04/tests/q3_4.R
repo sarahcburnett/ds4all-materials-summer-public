@@ -21,7 +21,7 @@ test = list(
         .t_check(is.numeric(japan_mpg) && length(japan_mpg) == 1,
                  "`japan_mpg` should be a single number.")
         .t_check(!is.nan(japan_mpg),
-                 "`japan_mpg` is NaN: no cars matched your filter, so there was nothing to average. Check how Japan is spelled in the `Origin` column.")
+                 "`japan_mpg` is NaN: no cars matched your filter, so there was nothing to average. Check the spelling: levels(cars_clean$Origin) lists the origins.")
         .t_check(!is.na(japan_mpg),
                  "`japan_mpg` is NA. Check what na.rm = TRUE does in mean().")
         .ans <- .t_num(japan_mpg)
